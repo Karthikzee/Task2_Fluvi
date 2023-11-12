@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    volumes:
+      - ./:/usr/src/application:ro
+    ports:
+      - 3000:3000
+    networks:
+      - fastapi-network
+
+  mongodb:
+      image: mongo:latest
+      ports:
+        - 27017:27017
+      volumes:
+        - dbdata6:/data/db
+      networks:
+        - fastapi-network
+
+volumes:
+  dbdata6:
+
+networks:
+  fastapi-network:
+    driver: bridge
